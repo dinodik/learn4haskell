@@ -211,31 +211,31 @@ So, the output in this example means that 'False' has type 'Bool'.
 > Try to guess first and then compare your expectations with GHCi output
 
 >>> :t True
-Bool
+True :: Bool
 >>> :t 'a'
-Char
+'a' :: Char
 >>> :t 42
-Num a => a
+42 :: Num a => a
 
 A pair of boolean and char:
 >>> :t (True, 'x')
-(Bool, Char)
+(True, 'x') :: (Bool, Char)
 
 Boolean negation:
 >>> :t not
-Bool -> Bool
+not :: Bool -> Bool
 
 Boolean 'and' operator:
 >>> :t (&&)
-Bool -> Bool -> Bool
+(&&) :: Bool -> Bool -> Bool
 
 Addition of two numbers:
 >>> :t (+)
-Num a => a -> a -> a
+(+) :: Num a => a -> a -> a
 
 Maximum of two values:
 >>> :t max
-Ord a => a -> a -> a
+max :: Ord a => a -> a -> a
 
 You might not understand each type at this moment, but don't worry! You've only
 started your Haskell journey. Types will become your friends soon.
@@ -494,7 +494,7 @@ Implement a function that returns the last digit of a given number.
 -}
 -- DON'T FORGET TO SPECIFY THE TYPE IN HERE
 lastDigit :: Int -> Int
-lastDigit n = n `mod` 10
+lastDigit n = abs n `mod` 10
 
 
 {- |
@@ -650,8 +650,8 @@ specifying complex expressions.
 sumLast2 :: Int -> Int
 sumLast2 n = last1 + last2
     where
-        last1 = n `mod` 10
-        last2 = div (n `mod` 100) 10
+        last1 = lastDigit n
+        last2 = lastDigit (abs n `div` 10)
 
 {- |
 =💣= Task 10*
@@ -673,8 +673,10 @@ aren't ready for this boss yet!
 
 firstDigit :: Int -> Int
 firstDigit n
-    | n < 10 = n
-    | otherwise = firstDigit (div n 10)
+    | m < 10 = m
+    | otherwise = firstDigit (div m 10)
+    where
+        m = abs n
 
 
 {-
