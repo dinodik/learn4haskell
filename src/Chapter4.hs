@@ -743,14 +743,10 @@ reverseTree (Node v x y) = Node v (reverseTree y) (reverseTree x)
 treeToList :: Tree a -> List a
 treeToList EmptyTree = Empty
 treeToList (Node v x y) = Cons v (treeToList x) `appendLists` treeToList y
+-- how would you 'unflatten' a tree?
 
 {-
 You did it! Now it is time to open pull request with your changes
 and summon @vrom911 for the review!
-
-t = Node 1 (Node 3 EmptyTree (Node 2 EmptyTree EmptyTree)) (Node 5 EmptyTree EmptyTree)
-        1
-      3   5
-    ~  2
 -}
 
